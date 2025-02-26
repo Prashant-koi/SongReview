@@ -17,29 +17,31 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
-          <div className="flex items-center">
-            <h1 className="text-xl font-bold">MyApp</h1>
+          
+          <div className={`${!isLargeScreen ? 'flex-1 text-center' : ''} flex items-center`}>
+            <h1 className={`text-xl font-bold ${!isLargeScreen ? 'mx-auto' : ''}`}>MyApp</h1>
           </div>
 
           {/* for Large Screens */}
           {isLargeScreen && (
             <div className="flex-1 flex justify-center items-center">
               <div className="flex space-x-8">
-                <a href="#" className="hover:bg-darkGray px-3 py-2 rounded-md">Home</a>
-                <a href="#" className="hover:bg-darkGray px-3 py-2 rounded-md">My Songs</a>
-                <a href="#" className="hover:bg-darkGray px-3 py-2 rounded-md">Ranking</a>
+                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Home</a>
+                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">My Songs</a>
+                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Ranking</a>
               </div>
             </div>
           )}
             
+          
           {isLargeScreen && (
-            <div className='flex flex-row gap-7'>
-              <a href="#" ><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded  '>Create Account</button></a>
+            <div className='flex flex-row gap-7 justify-center'>
+              <a href="#"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></a>
               <button>Sign Up</button>
             </div>
           )}
 
-          {/* For small screens */}
+          {/* Hamburger menu */}
           {!isLargeScreen && (
             <div className="flex items-center">
               <button
@@ -66,15 +68,15 @@ function Navbar() {
         </div>
       </div>
 
-       {/* Display of Small Screens */}
+      {/* Mobile menu */}
       {isOpen && !isLargeScreen && (
-        <div className="bg-darkGray text-center ">
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray">Home</a>
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray">My Songs</a>
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray ">Ranking</a>
-          <div className='flex flex-col justify-center items-center gap-2'>
-          <a href="#" ><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded  '>Create Account</button></a>
-          <button>Sign Up</button>
+        <div className="bg-darkGray text-center py-2">
+          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Home</a>
+          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">My Songs</a>
+          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Ranking</a>
+          <div className='flex flex-col justify-center items-center gap-2 mt-2 mb-2'>
+            <a href="#"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></a>
+            <button className="py-2">Sign Up</button>
           </div>
         </div>
       )}
