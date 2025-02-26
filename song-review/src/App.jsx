@@ -3,6 +3,7 @@ import HeroSection from './pages/herosection'
 import MainLayout from './components/MainLayout'
 import AuthLayout from './components/AuthLayout';
 import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
       <Route element={<AuthLayout />}>
       <Route path='/login' element={<Login />} />
+      <Route path='/signup' element= {<SignUp />} />
       </Route>
     </Routes>
     </BrowserRouter>

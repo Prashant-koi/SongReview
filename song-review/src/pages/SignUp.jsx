@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { UserIcon, KeyIcon, Mail } from "lucide-react";
+import {  KeyIcon, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword ,  setConfirmPassword] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle login logic here
+        // Signin Logic Here
     };
 
     return (
@@ -16,8 +17,8 @@ export default function Login() {
             <div className="max-w-md w-full space-y-8 bg-gray-900 p-8 rounded-lg shadow-lg border border-gray-800">
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-white">Welcome Back!</h2>
-                    <p className="mt-2 text-sm text-gray-400">Please sign in to your account</p>
+                    <h2 className="text-3xl font-bold text-white">Welcome!</h2>
+                    <p className="mt-2 text-sm text-gray-400">Create an account</p>
                 </div>
 
                 {/* Form */}
@@ -59,7 +60,27 @@ export default function Login() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="block w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-white"
-                                    placeholder="Enter your password"
+                                    placeholder="Set your password"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="relative">
+                            <label htmlFor="password" className="text-sm font-medium text-gray-300">
+                                Confirm Password
+                            </label>
+                            <div className="mt-1 relative rounded-md shadow-sm">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <KeyIcon className="h-5 w-5 text-gray-500" />
+                                </div>
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="block w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-white"
+                                    placeholder="Confirm your password"
                                     required
                                 />
                             </div>
@@ -69,20 +90,16 @@ export default function Login() {
                     {/* Remember me  and forgot pass(need to add functionality later)*/}
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="remember-me"
-                                className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-700 rounded bg-gray-800"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
-                                Remember me
+        
+                            <label  className="ml-2 block text-sm text-gray-300">
+                                Already an user?
                             </label>
                         </div>
 
                         <div className="text-sm">
-                            <a href="#" className="font-medium text-pink-400 hover:text-pink-300">
-                                Forgot your password?
-                            </a>
+                            <Link to="/login" className="font-medium text-pink-400 hover:text-pink-300">
+                                Login
+                            </Link>
                         </div>
                     </div>
 
@@ -92,7 +109,7 @@ export default function Login() {
                             type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-pink-400 to-pink-800 hover:from-pink-500 hover:to-pink-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                         >
-                            Login
+                            Sign in
                         </button>
                     </div>
 
@@ -121,17 +138,9 @@ export default function Login() {
                                 <path fill="none" d="M0 0h48v48H0z"></path>
                             </svg>
                             </div>
-                            Sign in with Google
+                            Sign up with Google
                         </button>
                     </div>
-
-                    {/* Sign Up link */}
-                    <p className="text-center text-sm text-gray-400">
-                        Don't have an account?{" "}
-                        <Link to="/signup" className="font-medium text-pink-400 hover:text-pink-300">
-                            Sign up
-                        </Link>
-                    </p>
                 </form>
             </div>
         </div>
