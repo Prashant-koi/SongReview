@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768); // Tailwind's 'md' breakpoint
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
+  const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   // Update state on screen resize
   useEffect(() => {
@@ -17,7 +20,6 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
-          
           <div className={`${!isLargeScreen ? 'flex-1 text-center' : ''} flex items-center`}>
             <h1 className={`text-xl font-bold ${!isLargeScreen ? 'mx-auto' : ''}`}>MyApp</h1>
           </div>
@@ -26,18 +28,26 @@ function Navbar() {
           {isLargeScreen && (
             <div className="flex-1 flex justify-center items-center">
               <div className="flex space-x-8">
-                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Home</a>
-                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">My Songs</a>
-                <a href="#" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Ranking</a>
+                <Link to="/" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Home</Link>
+                <Link to="/mysongs" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">My Songs</Link>
+                <Link to="/ranking" className="hover:bg-hoverDarkGray px-3 py-2 rounded-md transition-colors">Ranking</Link>
               </div>
             </div>
           )}
             
-          
           {isLargeScreen && (
             <div className='flex flex-row gap-7 justify-center'>
-              <a href="#"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></a>
-              <button>Sign Up</button>
+              {isAuthenticated ? (
+                <>
+                  <span className="text-gray-300">Hello, {user?.name || 'User'}</span>
+                  <button onClick={logout} className='block px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded'>Logout</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/signup"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></Link>
+                  <Link to="/login"><button>Sign In</button></Link>
+                </>
+              )}
             </div>
           )}
 
@@ -71,12 +81,21 @@ function Navbar() {
       {/* Mobile menu */}
       {isOpen && !isLargeScreen && (
         <div className="bg-darkGray text-center py-2">
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Home</a>
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">My Songs</a>
-          <a href="#" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Ranking</a>
+          <Link to="/" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Home</Link>
+          <Link to="/mysongs" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">My Songs</Link>
+          <Link to="/ranking" className="block px-4 py-2 hover:bg-hoverDarkGray transition-colors">Ranking</Link>
           <div className='flex flex-col justify-center items-center gap-2 mt-2 mb-2'>
-            <a href="#"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></a>
-            <button className="py-2">Sign Up</button>
+            {isAuthenticated ? (
+              <>
+                <span className="text-gray-300">Hello, {user?.name || 'User'}</span>
+                <button onClick={logout} className='block px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded'>Logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/signup"><button className='block px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-800 rounded'>Create Account</button></Link>
+                <Link to="/login"><button className="py-2">Sign In</button></Link>
+              </>
+            )}
           </div>
         </div>
       )}

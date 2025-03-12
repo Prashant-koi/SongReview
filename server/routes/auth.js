@@ -1,23 +1,18 @@
 const express = require('express');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 
+// Route for initiating Google OAuth
 router.get('/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+// Callback route after Google OAuth
 router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    const token = jwt.sign(
-      { userId: req.user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
-    );
-    
-    res.redirect(`${process.env.CLIENT_URL}/auth/success?token=${token}`);
-  }
+  passport.authenticate('google', { 
+    failureRedirect: process.env.FRONTEND_URL + '/login',
+    successRedirect: process.env.FRONTEND_URL
+  })
 );
 
 router.get('/logout', (req, res) => {
@@ -25,4 +20,4 @@ router.get('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
 });
 
-module.exports = router; 
+module.exports = router;
