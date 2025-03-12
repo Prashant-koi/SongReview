@@ -1,4 +1,5 @@
 import React from 'react';
+import GenreGrid from '../components/GenreGrid';
 
 function HeroSection() {
     // Sample song data 
@@ -11,8 +12,8 @@ function HeroSection() {
     };
 
     return (
-        <div className="bg-darkGray py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="bg-darkGray">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <h2 className="text-2xl font-bold text-white mb-8 text-center">Featured Song</h2>
                 
                 <div className="bg-[#252529] rounded-lg shadow-lg overflow-hidden">
@@ -48,21 +49,10 @@ function HeroSection() {
                         </div>
                     </div>
                 </div>
-                
-                <div className="mt-12">
-                    <h2 className="text-2xl font-bold text-white mb-6 text-center">Top Genres</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {['Pop', 'Rock', 'Hip Hop', 'Electronic'].map((genre) => (
-                            <div key={genre} className="bg-[#252529] p-4 rounded-lg text-center hover:bg-hoverDarkGray transition-colors cursor-pointer">
-                                <div className="w-16 h-16 mx-auto bg-gradient-to-r from-pink-400 to-pink-800 rounded-full flex items-center justify-center mb-2">
-                                    <span className="text-white text-xl font-bold">{genre.charAt(0)}</span>
-                                </div>
-                                <p className="text-white font-medium">{genre}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
+
+            {/* Replace the old genre section with our new genre grid */}
+            <GenreGrid />
         </div>
     );
 }
